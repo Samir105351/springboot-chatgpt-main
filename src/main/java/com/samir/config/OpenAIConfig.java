@@ -1,4 +1,4 @@
-package com.javatechie.config;
+package com.samir.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
