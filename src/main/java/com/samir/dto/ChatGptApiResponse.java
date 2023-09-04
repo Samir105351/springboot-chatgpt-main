@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatGptResponse {
+public class ChatGptApiResponse {
 
     private List<Choice> choices;
 
@@ -19,6 +19,7 @@ public class ChatGptResponse {
     public static class Choice {
 
         private int index;
+
         private Message message;
 
     }

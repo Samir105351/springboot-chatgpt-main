@@ -1,27 +1,19 @@
-package com.samir.service;
+package com.samir.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.samir.Repository.InterviewQuestionRepository;
 import com.samir.entity.InterviewQuestion;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class DataBaseServiceImpl implements DataBaseService {
-    private final InterviewQuestionRepository interviewQuestionRepository;
-
-    @Override
-    public List<InterviewQuestion> save(String GPTResponse) {
+public class JSONtoInterviewQuestionList {
+    public static List<InterviewQuestion> interviewQuestionList(String gptResponse){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(GPTResponse);
+            JsonNode jsonNode = objectMapper.readTree(gptResponse);
 
             if (jsonNode.isArray()) {
                 List<InterviewQuestion> interviewQuestions = new ArrayList<>();
@@ -37,7 +29,7 @@ public class DataBaseServiceImpl implements DataBaseService {
 
                     }
                 }
-                return interviewQuestionRepository.saveAll(interviewQuestions);
+                return interviewQuestions;
             } else {
                 throw new IllegalArgumentException("Input is not an array of JSON objects.");
             }
@@ -45,10 +37,5 @@ public class DataBaseServiceImpl implements DataBaseService {
             e.printStackTrace();
             return new ArrayList<>();
         }
-    }
-
-    @Override
-    public List<InterviewQuestion> getAllCodingQuestions() {
-        return interviewQuestionRepository.findAll();
     }
 }
