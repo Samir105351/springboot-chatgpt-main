@@ -10,8 +10,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 @Configuration
 public class OpenAIConfig {
 
-    @Value("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")
-
+    @Value("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")
     private String openaiApiKey;
 
     @Bean

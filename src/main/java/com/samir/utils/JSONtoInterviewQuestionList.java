@@ -1,41 +1,30 @@
 package com.samir.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.samir.entity.InterviewQuestion;
+import com.samir.exception.ApiException;
+import org.springframework.http.HttpStatus;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JSONtoInterviewQuestionList {
-    public static List<InterviewQuestion> interviewQuestionList(String gptResponse){
+    public static List<InterviewQuestion> interviewQuestionList(String gptResponse) {
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(gptResponse);
 
-            if (jsonNode.isArray()) {
-                List<InterviewQuestion> interviewQuestions = new ArrayList<>();
-                List<InterviewQuestion> invalidInterviewQuestions = new ArrayList<>();
+            List<InterviewQuestion> interviewQuestions = new ArrayList<>();
 
-                for (JsonNode objectNode : jsonNode) {
-                    try {
-                        InterviewQuestion interviewQuestion = objectMapper.treeToValue(objectNode, InterviewQuestion.class);
-                        interviewQuestions.add(interviewQuestion);
-                    } catch (JsonProcessingException e) {
-
-                        e.printStackTrace();
-
-                    }
-                }
-                return interviewQuestions;
-            } else {
-                throw new IllegalArgumentException("Input is not an array of JSON objects.");
+            for (JsonNode objectNode : jsonNode) {
+                InterviewQuestion interviewQuestion = objectMapper.treeToValue(objectNode, InterviewQuestion.class);
+                interviewQuestions.add(interviewQuestion);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+
+            return interviewQuestions;
+        } catch (Exception e) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", "An exception occurred while converting JSON to InterviewQuestionList");
         }
     }
 }

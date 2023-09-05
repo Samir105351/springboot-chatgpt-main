@@ -23,5 +23,4 @@ public class ChatGptApiResponse {
         private Message message;
 
     }
-
 }

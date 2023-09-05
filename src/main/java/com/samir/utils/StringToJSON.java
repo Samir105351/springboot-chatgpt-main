@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.samir.dto.ChatGptApiResponse;
 import com.samir.dto.InterviewQuestionCreationRequest;
+import com.samir.exception.ApiException;
+import org.springframework.http.HttpStatus;
 
-import java.io.IOException;
-
-public class InterviewJsonFormatter {
+public class StringToJSON {
     public static String jsonFormatter(ChatGptApiResponse apiResponse, InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
 
         String jsonResponse = null;
@@ -33,14 +33,21 @@ public class InterviewJsonFormatter {
                 jsonResponse = jsonArray.toString();
 
             }
-        } catch (IOException e) {
-            jsonResponse = "Error: An exception occurred while processing the response from the ChatGPT API.";
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", "An exception occurred while processing the response from the ChatGPT API.");
         }
 
-        if (jsonResponse == null) {
-            jsonResponse = "Error: No response from the ChatGPT API.";
-        }
         return jsonResponse;
+    }
+
+    public static String jsonFormatter(String json){
+        if(json==null) return "";
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(json);
+            return jsonNode.path("error").path("message").asText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

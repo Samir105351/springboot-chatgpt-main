@@ -3,7 +3,7 @@ package com.samir.utils;
 import com.samir.dto.InterviewQuestionCreationRequest;
 
 public class PromptUtil {
-    public static String createInterviewQuestionPrompt(InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
+    public static String createInterviewQuesPrompt(InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
 
         StringBuilder promptBuilder = new StringBuilder();
 
@@ -23,5 +23,9 @@ public class PromptUtil {
         String prompt = promptBuilder.toString();
         System.out.println("Input Prompt: \n" + prompt);
         return prompt;
+    }
+
+    public static String generalPrompt(){
+        return "hello";
     }
 }
