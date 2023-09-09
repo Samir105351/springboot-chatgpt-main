@@ -21,7 +21,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         errorDetails.put("errorDetails", ex.getErrorDetails());
         errorDetails.put("description", ex.getDescription());
 
-        return new ResponseEntity<>(errorDetails, new HttpHeaders(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(errorDetails, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -32,4 +32,9 @@ public class InterviewQuestionServiceImpl implements InterviewQuestionService {
     public List<InterviewQuestion> getInterviewQuestions() {
         return databaseService.getAllInterviewQuestions();
     }
+
+    @Override
+    public List<InterviewQuestion> getRandomInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
+        return databaseService.getRandomInterviewQuestions(interviewQuestionCreationRequest);
+    }
 }

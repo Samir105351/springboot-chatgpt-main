@@ -1,6 +1,7 @@
 package com.samir.service;
 
 import com.samir.Repository.InterviewQuestionRepository;
+import com.samir.dto.InterviewQuestionCreationRequest;
 import com.samir.entity.InterviewQuestion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -22,5 +23,10 @@ public class DatabaseServiceImpl implements DatabaseService {
     @Override
     public List<InterviewQuestion> getAllInterviewQuestions() {
         return interviewQuestionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    }
+
+    @Override
+    public List<InterviewQuestion> getRandomInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
+        return interviewQuestionRepository.getRandomQuestions(interviewQuestionCreationRequest);
     }
 }
