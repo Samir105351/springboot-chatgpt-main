@@ -49,6 +49,8 @@ public class ChatGPTApiServiceImpl implements ChatGPTApiService {
                     break;
             }
             throw new ApiException(statusCode.value(), errorMessage, desc);
+        } catch (Exception e){
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.value(),"Internal Server Error","The url at https://api.openai.com/v1/chat/completions is unresponsive ");
         }
     }
 }

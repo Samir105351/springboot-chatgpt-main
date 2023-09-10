@@ -18,16 +18,21 @@ public class InterviewQuestionCreationRequest {
     private String realm;
 
     @Min(1)
+    @Max(10)
     @NotNull
     private Long fromTargetExp;
 
+    @Min(1)
     @Max(10)
     @NotNull
     private Long toTargetExp;
 
     @Min(0)
+    @Max(10)
     @NotNull
     private Long fromDifficulty;
+
+    @Min(0)
     @Max(10)
     @NotNull
     private Long toDifficulty;
