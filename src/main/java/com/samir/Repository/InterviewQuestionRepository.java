@@ -16,7 +16,7 @@ public interface InterviewQuestionRepository extends JpaRepository<InterviewQues
             "    SELECT iq.* " +
             "    FROM interview_question iq " +
             "    WHERE " +
-            "        iq.realm = :#{#request.realm} " +
+            "        LOWER(iq.realm) = LOWER(:#{#request.realm}) " +
             "        AND iq.from_target_exp <= :#{#request.toTargetExp} " +
             "        AND iq.to_target_exp >= :#{#request.fromTargetExp} " +
             "        AND iq.from_difficulty <= :#{#request.toDifficulty} " +
@@ -25,5 +25,6 @@ public interface InterviewQuestionRepository extends JpaRepository<InterviewQues
             ") " +
             "WHERE ROWNUM <= :#{#request.numberOfQuestions}", nativeQuery = true)
     List<InterviewQuestion> getRandomQuestions(@Param("request") InterviewQuestionCreationRequest request);
+
 }
 

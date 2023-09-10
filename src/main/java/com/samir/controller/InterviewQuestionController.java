@@ -33,7 +33,7 @@ public class InterviewQuestionController {
     }
 
     @PostMapping("/create-interview-questions")
-    public List<InterviewQuestion> createInterviewQuestions(@RequestBody InterviewQuestionCreationRequest request) {
-        return interviewQuestionService.createInterviewQuestions(request);
+    public List<InterviewQuestion> createInterviewQuestions(@Valid @RequestBody InterviewQuestionCreationRequest request,BindingResult bindingResult) {
+        return interviewQuestionService.createInterviewQuestions(request,bindingResult);
     }
 }

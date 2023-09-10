@@ -8,7 +8,7 @@ import javax.naming.Binding;
 import java.util.List;
 
 public interface InterviewQuestionService {
-    List<InterviewQuestion> createInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest);
+    List<InterviewQuestion> createInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest,BindingResult bindingResult);
 
     List<InterviewQuestion> getInterviewQuestions();
 
