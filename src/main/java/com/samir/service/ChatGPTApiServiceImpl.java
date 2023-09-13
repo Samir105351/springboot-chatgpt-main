@@ -3,7 +3,7 @@ package com.samir.service;
 import com.samir.dto.ChatGPTApiRequest;
 import com.samir.dto.ChatGptApiResponse;
 import com.samir.exception.ApiException;
-import com.samir.utils.StringToJSON;
+import com.samir.utils.ConvertToJSON;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class ChatGPTApiServiceImpl implements ChatGPTApiService {
             return template.postForObject(apiURL, apiRequest, ChatGptApiResponse.class);
         } catch (HttpClientErrorException e) {
             HttpStatus statusCode = (HttpStatus) e.getStatusCode();
-            String desc = StringToJSON.jsonFormatter(e.getResponseBodyAsString());
+            String desc = ConvertToJSON.errorMessage(e.getResponseBodyAsString());
             String errorMessage = switch (statusCode) {
                 case UNAUTHORIZED -> "Invalid Authentication";
                 case TOO_MANY_REQUESTS -> "Too Many Requests";
