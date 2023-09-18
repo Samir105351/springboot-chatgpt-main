@@ -1,14 +1,13 @@
 package com.samir.service;
 
-import com.samir.dto.InterviewQuestionCreationRequest;
-import com.samir.entity.InterviewQuestion;
+import com.samir.dto.QuestionCreationRequest;
+import com.samir.entity.Question;
 
 import java.util.List;
 
 public interface DatabaseService {
-    List<InterviewQuestion> save(List<InterviewQuestion> interviewQuestions);
+    List<Question> save(List<Question> questions);
 
-    List<InterviewQuestion> getAllInterviewQuestions();
+    List<Question> getAllInterviewQuestions();
 
-    List<InterviewQuestion> getRandomInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest);
 }

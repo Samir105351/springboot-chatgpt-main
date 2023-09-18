@@ -8,14 +8,20 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-public class InterviewQuestionCreationRequest {
+public class QuestionCreationRequest {
 
     @Min(1)
     @NotNull
     private Long numberOfQuestions;
 
     @NotEmpty
+    private String questionType;
+
+    @NotEmpty
     private String realm;
+
+    @NotEmpty
+    private String profession;
 
     @Min(1)
     @Max(10)

@@ -1,8 +1,7 @@
 package com.samir.service;
 
-import com.samir.Repository.InterviewQuestionRepository;
-import com.samir.dto.InterviewQuestionCreationRequest;
-import com.samir.entity.InterviewQuestion;
+import com.samir.Repository.QuestionRepository;
+import com.samir.entity.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,20 +12,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatabaseServiceImpl implements DatabaseService {
 
-    private final InterviewQuestionRepository interviewQuestionRepository;
+    private final QuestionRepository questionRepository;
 
     @Override
-    public List<InterviewQuestion> save(List<InterviewQuestion> interviewQuestions) {
-        return interviewQuestionRepository.saveAll(interviewQuestions);
+    public List<Question> save(List<Question> questions) {
+        return questionRepository.saveAll(questions);
     }
 
     @Override
-    public List<InterviewQuestion> getAllInterviewQuestions() {
-        return interviewQuestionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    public List<Question> getAllInterviewQuestions() {
+        return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    @Override
-    public List<InterviewQuestion> getRandomInterviewQuestions(InterviewQuestionCreationRequest interviewQuestionCreationRequest) {
-        return interviewQuestionRepository.getRandomQuestions(interviewQuestionCreationRequest);
-    }
+
 }
