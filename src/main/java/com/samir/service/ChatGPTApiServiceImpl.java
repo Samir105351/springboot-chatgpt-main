@@ -3,7 +3,6 @@ package com.samir.service;
 import com.samir.dto.ChatGPTApiRequest;
 import com.samir.dto.ChatGptApiResponse;
 import com.samir.exception.ApiException;
-import com.samir.utils.ChatGPTMessageExtractor;
 import com.samir.utils.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,8 +31,7 @@ public class ChatGPTApiServiceImpl implements ChatGPTApiService {
         System.out.println("model " + model + " " + "apiURL " + apiURL + " " + "temperature " + temperature);
         try {
             ChatGPTApiRequest apiRequest = new ChatGPTApiRequest(model, prompt, temperature);
-            ChatGptApiResponse apiResponse = template.postForObject(apiURL, apiRequest, ChatGptApiResponse.class);
-            return apiResponse;
+            return template.postForObject(apiURL, apiRequest, ChatGptApiResponse.class);
         } catch (HttpClientErrorException e) {
             HttpStatus statusCode = (HttpStatus) e.getStatusCode();
             String desc = Validation.errorMessage(e.getResponseBodyAsString());

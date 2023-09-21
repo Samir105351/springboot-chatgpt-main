@@ -1,19 +1,14 @@
 package com.samir.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.samir.dto.ChatGPTAnswerTemplate;
 import com.samir.dto.ChatGptApiResponse;
 import com.samir.dto.QuestionCreationRequest;
 import com.samir.entity.Question;
-import com.samir.exception.ApiException;
 import com.samir.utils.JsonParserUtil;
 import com.samir.utils.PromptUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

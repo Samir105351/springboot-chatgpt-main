@@ -17,7 +17,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-    @GetMapping("/get-all-interview-questions")
+    @GetMapping("/get-all-questions")
     public List<Question> getAllQuestions() {
         return questionService.getQuestions();
     }

@@ -1,5 +1,6 @@
 package com.samir.service;
 
+import com.samir.dto.ChatGPTAnswerTemplate;
 import com.samir.dto.QuestionCreationRequest;
 import com.samir.entity.Question;
 
@@ -9,5 +10,8 @@ public interface DatabaseService {
     List<Question> save(List<Question> questions);
 
     List<Question> getAllInterviewQuestions();
+
+
+
 
 }
