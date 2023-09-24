@@ -1,8 +1,10 @@
 package com.samir.controller;
 
+import com.samir.dto.QuestionGetRequest;
 import com.samir.entity.Question;
 import com.samir.service.DatabaseService;
 import com.samir.service.PDFService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,10 +27,10 @@ public class PDFController {
     private final DatabaseService databaseService;
 
     @GetMapping("/generate-pdf")
-    public ResponseEntity<byte[]> generatePDF() {
-        List<Question> questionList=databaseService.getAllInterviewQuestions();
+    public ResponseEntity<byte[]> generatePDF(@Valid QuestionGetRequest request) {
+        List<Question> questionList=databaseService.getRandomQuestions(request);
 
-        byte[] pdfBytes = pdfService.generatePDF();
+        byte[] pdfBytes = pdfService.generatePDF(request);
 
         if (pdfBytes != null) {
             HttpHeaders headers = new HttpHeaders();
@@ -42,5 +44,9 @@ public class PDFController {
         } else {
             return ResponseEntity.status(500).body(null);
         }
+    }
+    @GetMapping("/test")
+    List<Question> quest(@Valid QuestionGetRequest request){
+        return databaseService.getRandomQuestions(request);
     }
 }

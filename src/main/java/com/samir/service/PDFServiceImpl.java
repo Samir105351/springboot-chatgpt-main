@@ -6,6 +6,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.samir.dto.ChatGPTAnswerTemplate;
+import com.samir.dto.QuestionGetRequest;
 import com.samir.entity.Question;
 import com.samir.utils.PDFContent;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class PDFServiceImpl implements PDFService {
     private final DatabaseService databaseService;
 
     @Override
-    public byte[] generatePDF() {
-        List<Question> questionList= databaseService.getAllInterviewQuestions();
+    public byte[] generatePDF(QuestionGetRequest request) {
+        List<Question> questionList= databaseService.getRandomQuestions(request);
         List<ChatGPTAnswerTemplate> templates=
         questionList.stream()
                 .map(question -> {
